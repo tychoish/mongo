@@ -97,7 +97,8 @@ sh.moveChunk = function( fullName , find , to ) {
 }
 
 sh.setBalancerState = function( onOrNot ) { 
-    db.getSisterDB( "config" ).settings.update({ _id: "balancer" }, { $set : { stopped: onOrNot ? false : true } }, true );
+    sh._checkMongos();
+    db.getSiblingDB( "config" ).settings.update({ _id: "balancer" }, { $set : { stopped: onOrNot ? false : true } }, true );
 }
 
 sh.getBalancerState = function(configDB) {
